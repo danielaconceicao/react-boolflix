@@ -1,34 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+/* import {useState, useEffect} from 'react' */
+import FilmsList from './components/FilmsList'
+import { ApiProvider } from './components/ApiProvider'
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
+ /*  const [films, setFilms] = useState([])
+
+  function fetchFi(){
+    fetch('https://api.themoviedb.org/3/search/movie?api_key=d4bad6889ca363a569b4c048485b5ece&query=ritorno+al+futuro')
+      .then(res => res.json())
+      .then(page => {
+        console.log(page.results)
+        setFilms(page.results)
+      })
+  }
+
+  useEffect(() => {
+     fetchFi()
+  }, []) */
+   
 
   return (
-    <>
+    <ApiProvider>
       <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <h1>BoolFix</h1>
+       <FilmsList/>
+      {/*  {films.map(film => <p key={film.id}> {film.title}</p>)} */}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </ApiProvider>
   )
 }
 
