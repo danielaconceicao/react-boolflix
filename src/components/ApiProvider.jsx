@@ -1,25 +1,58 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect} from "react"
 import ApiContext from "../context/ApiContext"
 
 // eslint-disable-next-line react/prop-types
 export function ApiProvider({ children }) {/* (E um componente)funcao responsavel por fornecer os dados necessarios para os componentes filhos */
     const [films, setFilms] = useState([])
+    const [series, setSeries] = useState([])
+    const [searchText, setSearchText] = useState('')
 
-    function fetchFilms() {
-        fetch('https://api.themoviedb.org/3/search/movie?api_key=d4bad6889ca363a569b4c048485b5ece&query=ritorno+al+futuro')
-            .then(res => res.json())
-            .then(page => {
-                console.log(page.results)
-                setFilms(page.results)
-            })
+    const api_key_films = import.meta.env.VITE_MOVIE_DB_API_KEY
+    const api_key_series = import.meta.env.VITE_SERIES_DB_API_KEY
+    const films_api_url = `https://api.themoviedb.org/3/search/movie?api_key=${api_key_films}&query=${searchText}`
+    const series_api_url = `https://api.themoviedb.org/3/search/tv?api_key=${api_key_series}&query=${searchText}`
+
+    function handleSearchSubmit(e) {
+        e.preventDefault()
     }
 
-    useEffect(() => fetchFilms(), [])
+    function VoteAverage(film){
+        const vote = parseInt(film.vote_average)
+        return vote > 5 ? 5 : vote
+    }
+
+    useEffect(() => {
+        fetch(films_api_url)
+            .then(res => res.json())
+            .then(page => {
+                setFilms(page.results)
+            })
+
+        fetch(series_api_url)
+            .then(res => res.json())
+            .then(page => {
+                setSeries(page.results)
+            })
+    }, [searchText])
+
+
+    const values = {
+        films,
+        searchText,
+        setSearchText,
+        series,
+        setSeries,
+        handleSearchSubmit,
+        VoteAverage
+    }
 
     /* Dando acesso a outros componentes */
     return (
-        <ApiContext.Provider value={{ films }}>
+        <ApiContext.Provider value={ values }>
             {children}
         </ApiContext.Provider>
     )
 }
+
+/* https://api.themoviedb.org/3/search/movie?api_key=d4bad6889ca363a569b4c048485b5ece&query=ritorno+al+futuro */
