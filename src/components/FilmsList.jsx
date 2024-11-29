@@ -3,15 +3,18 @@ import ApiContext from "../context/ApiContext"
 
 export default function LayoutPage(){
     const { films } = useContext(ApiContext)
-    const [search, setSearch] = useState('')
+    const [searchFilm, setSearchFilm] = useState('')
     const [filmsFilter, setFilmsFilter] = useState([])
+        
+    function handleSearchFilm(){
+        const filtered = films.filter(film => film.title.toLowerCase().includes(searchFilm.toLowerCase()))
+        setFilmsFilter(filtered)
+    }
 
     useEffect(() => {
-        const filtered = films.filter(film => film.title.toLowerCase().includes(search.toLowerCase()))
-        setFilmsFilter(filtered)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [search])
-
+        handleSearchFilm()
+    }, [films]) 
+   
     return(
         <>
 
@@ -26,9 +29,9 @@ export default function LayoutPage(){
                      placeholder="search for your movie" 
                      aria-label="Recipient's username" 
                      aria-describedby="button-addon2" 
-                     value={search} 
-                     onChange={e => setSearch(e.target.value)}/>
-                    <button className="btn btn-outline-secondary" type="submit" id="button-addon2">search</button>
+                     value={searchFilm} 
+                     onChange={e => setSearchFilm(e.target.value)}/>
+                    <button onClick={handleSearchFilm} className="btn btn-outline-secondary" type="submit" id="button-addon2">search</button>
                 </div>
             </div>
 
