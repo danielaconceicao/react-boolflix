@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect} from "react"
+import { useState, useEffect } from "react"
 import ApiContext from "../context/ApiContext"
 
 // eslint-disable-next-line react/prop-types
@@ -17,9 +17,22 @@ export function ApiProvider({ children }) {/* (E um componente)funcao responsave
         e.preventDefault()
     }
 
-    function VoteAverage(film){
+    function VoteAverage(film) {
         const vote = parseInt(film.vote_average)
-        return vote > 5 ? 5 : vote
+        const stars = []
+
+        for (let i = 1; i <= 5; i++) {
+            stars.push(
+                <i
+                    className={i <= vote ? "bi bi-star-fill" : "bi bi-star"} 
+                    style={{ color: i <= vote ? "#FFD700" : "#D3D3D3" }} 
+                ></i>
+            )
+        }
+
+        return <>{stars}</>
+
+
     }
 
     useEffect(() => {
@@ -49,7 +62,7 @@ export function ApiProvider({ children }) {/* (E um componente)funcao responsave
 
     /* Dando acesso a outros componentes */
     return (
-        <ApiContext.Provider value={ values }>
+        <ApiContext.Provider value={values}>
             {children}
         </ApiContext.Provider>
     )

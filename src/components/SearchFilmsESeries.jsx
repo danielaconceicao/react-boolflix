@@ -26,14 +26,14 @@ export default function LayoutPage(){
 
             <ul>
                 {films.map(film => (<li key={film.id}>
-                    {film.title}, {film.original_title}, {VoteAverage(film)} <Flag code={film.original_language.toUpperCase()} style={{ width: '30px', height: '20px', marginLeft: '10px' }} />  
+                    <img src={`https://image.tmdb.org/t/p/w300${film.poster_path}`}/> {film.title}, {film.original_title}, {VoteAverage(film)} <Flag code={film.original_language.toUpperCase()} style={{ width: '30px', height: '20px', marginLeft: '10px' }} />  
                 </li>))}
             </ul>
 
             <ul>
                 {series.map(serie => (
                     <li key={serie.id}>
-                        {serie.name}, {serie.original_name}, {VoteAverage(serie)} <Flag code={serie.original_language.toUpperCase()} style={{ width: '30px', height: '20px', marginLeft: '10px' }} />  
+                        <img src={`https://image.tmdb.org/t/p/w300${serie.poster_path}`}/> {serie.name}, {serie.original_name}, {VoteAverage(serie)} <Flag code={serie.original_language.toUpperCase()} style={{ width: '30px', height: '20px', marginLeft: '10px' }} />  
                     </li>
                 ))}
             </ul>
