@@ -1,17 +1,28 @@
 import './App.css'
-/* import {useState, useEffect} from 'react' */
-import FilmsList from './components/SearchFilmsESeries'
+import { BrowserRouter, Route, Routes} from 'react-router-dom' 
+import SearchFilmsESeries from './components/SearchFilmsESeries'
 import { ApiProvider } from './components/ApiProvider'
+import Layout from './pages/Layout'
+import Home from './pages/Home'
+import SerieTv from './pages/SerieTv'
+import Film from './pages/Film'
+
 
 
 
 function App() {
   return (
     <ApiProvider>
-      <div>
-        <h1>BoolFix</h1>
-       <FilmsList/>
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path='/home' element={<Home />}/>
+            <Route path='/' element={<SearchFilmsESeries />}/>
+            <Route path='/serieTv' element={<SerieTv />}/>
+            <Route path='/film' element={<Film />}/>
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </ApiProvider>
   )
 }

@@ -1,3 +1,77 @@
 .input-group{
     width: 300px !important;
 }
+
+header{
+    background-color: #0f0f0f;
+    padding: 1rem;
+    img{
+        padding-right: 1.5rem;
+        width: 180px;
+    }
+
+    a{
+        text-decoration: none;
+        color: lightgray;
+        padding: 0 .8rem;
+        &:hover{
+            color: white;
+        }
+    }
+
+    i{
+        color: white;
+    }
+
+    .img-user{
+        width: 30px;
+    }
+}
+.d-none{
+    display: none !important;
+}
+
+.d-block{
+    display: block !important;
+}
+
+.card{
+    width: 13rem;
+    p{
+        color: white;
+    }
+}
+
+
+.card-body{
+    background-color: #0f0f0f;
+    border: 2px solid white;
+    display: none;
+}
+
+.card:hover .card-body{
+    display: inline-block;
+}
+
+.card:hover .card-img-top{
+    display: none;
+}
+
+main {
+    min-height: calc(100vh - 80px) !important;
+    background-color: #525151;
+}
+
+.film{
+
+    img{
+        height: 441px;
+    }
+}
+
+footer{
+    text-align: center;
+    background-color: #0f0f0f;
+    color: white;
+    padding: 1rem;
+}

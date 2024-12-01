@@ -1,42 +1,60 @@
-import { useContext } from "react" 
+import { useContext } from "react"
 import ApiContext from "../context/ApiContext"
-import Flag from 'react-world-flags' 
+// eslint-disable-next-line no-unused-vars
+import Flag from 'react-world-flags'
 
 
-export default function LayoutPage(){
-    // eslint-disable-next-line no-unused-vars
-    const { films, searchText, setSearchText, series, setSeries, handleSearchSubmit, VoteAverage } = useContext(ApiContext)
+export default function LayoutPage() {
+    const { films, series, VoteAverage } = useContext(ApiContext)
 
-    return(
-        <>
-            <form onSubmit={handleSearchSubmit}>
-                <div className="input-group mb-3">
-                    <input
-                     type="search"
-                     name="searchText" 
-                     id="searchText" 
-                     className="form-control" 
-                     placeholder="search for your movie" 
-                     aria-label="Recipient's username" 
-                     aria-describedby="button-addon2" 
-                     value={searchText} 
-                     onChange={e => setSearchText(e.target.value)}/>
+
+    return (
+        <div className="container">
+            <section className="films">
+                <div className="row">
+
+                    {films.map(film => (
+                        <div key={film.id} className="col py-2">
+                            <div className="card">
+                                <img src={`https://image.tmdb.org/t/p/w300${film.poster_path}`} className="card-img-top" alt={film.original_title} />
+                                <div className="card-body">
+                                    <p className="card-title"><strong>Titulo: </strong>{film.title}</p>
+                                    <p className="card-text"><strong>Titulo Originale:</strong> {film.original_title}</p>
+                                    <p className="card-text"><strong>Voto:</strong> {VoteAverage(film)}</p>
+                                    <p><strong>Overview:</strong> {film.overview}</p>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
-            </form>
+                {/*<Flag code={film.original_language.toUpperCase()} style={{ width: '30px', height: '20px', marginLeft: '10px' }} />
+                </li>))} */}
+            </section>
 
-            <ul>
-                {films.map(film => (<li key={film.id}>
-                    <img src={`https://image.tmdb.org/t/p/w300${film.poster_path}`}/> {film.title}, {film.original_title}, {VoteAverage(film)} <Flag code={film.original_language.toUpperCase()} style={{ width: '30px', height: '20px', marginLeft: '10px' }} />  
-                </li>))}
-            </ul>
+            <section className="series">
+                <div className="row">
+                    {series.map(serie => (
+                        <div key={serie.id} className="col py-2">
+                            <div className="card">
+                                <img src={`https://image.tmdb.org/t/p/w300${serie.poster_path}`} className="card-img-top" alt={serie.name} />
+                                <div className="card-body">
+                                    <p className="card-title"><strong>Titulo: </strong>{serie.name}</p>
+                                    <p className="card-text"><strong>Titulo Originale:</strong> {serie.original_name}</p>
+                                    <p className="card-text"><strong>Voto:</strong> {VoteAverage(serie)}</p>
+                                    <p><strong>Overview:</strong> {serie.overview}</p>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
 
-            <ul>
+            {/*
                 {series.map(serie => (
-                    <li key={serie.id}>
-                        <img src={`https://image.tmdb.org/t/p/w300${serie.poster_path}`}/> {serie.name}, {serie.original_name}, {VoteAverage(serie)} <Flag code={serie.original_language.toUpperCase()} style={{ width: '30px', height: '20px', marginLeft: '10px' }} />  
-                    </li>
+                     <Flag code={serie.original_language.toUpperCase()} style={{ width: '30px', height: '20px', marginLeft: '10px' }} />
+                    
                 ))}
-            </ul>
-        </>
+            */}
+        </div>
     )
 }

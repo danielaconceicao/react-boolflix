@@ -7,17 +7,18 @@ export function ApiProvider({ children }) {/* (E um componente)funcao responsave
     const [films, setFilms] = useState([])
     const [series, setSeries] = useState([])
     const [searchText, setSearchText] = useState('')
+    const [searchTextVisibible, setSearchTextVisibible] = useState(false)
 
     const api_key_films = import.meta.env.VITE_MOVIE_DB_API_KEY
     const api_key_series = import.meta.env.VITE_SERIES_DB_API_KEY
     const films_api_url = `https://api.themoviedb.org/3/search/movie?api_key=${api_key_films}&query=${searchText}`
     const series_api_url = `https://api.themoviedb.org/3/search/tv?api_key=${api_key_series}&query=${searchText}`
 
-    function handleSearchSubmit(e) {
+    function handleSearchSubmit(e) {/* para impedir o efeiro do navegador no formulario */
         e.preventDefault()
     }
 
-    function VoteAverage(film) {
+    function VoteAverage(film) {/* para colocar as estrelas no filme */
         const vote = parseInt(film.vote_average)
         const stars = []
 
@@ -31,8 +32,6 @@ export function ApiProvider({ children }) {/* (E um componente)funcao responsave
         }
 
         return <>{stars}</>
-
-
     }
 
     useEffect(() => {
@@ -57,7 +56,9 @@ export function ApiProvider({ children }) {/* (E um componente)funcao responsave
         series,
         setSeries,
         handleSearchSubmit,
-        VoteAverage
+        VoteAverage,
+        searchTextVisibible,
+        setSearchTextVisibible,
     }
 
     /* Dando acesso a outros componentes */
