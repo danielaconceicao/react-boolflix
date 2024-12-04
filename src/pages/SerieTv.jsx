@@ -1,6 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react"
+import { useContext } from "react"
+import ApiContext from "../context/ApiContext"
 
 export default function SerieTv(){
+    const { api_key_series } = useContext(ApiContext)
     const [serieSuspense, setSerieSuspense] = useState([])
     const [serieAction, setSerieAction] = useState([])
     const [serieRomance, setSerieRomance] = useState([])
@@ -9,28 +13,28 @@ export default function SerieTv(){
 
     useEffect(() => {
 
-        fetch('https://api.themoviedb.org/3/search/movie?api_key=d4bad6889ca363a569b4c048485b5ece&query=romance')
+        fetch(`https://api.themoviedb.org/3/search/movie?api_key=${api_key_series}&query=romance`)
             .then(res => res.json())
             .then(page => {
                 console.log(page.results)
                 setSerieRomance(page.results)
             })
 
-        fetch('https://api.themoviedb.org/3/search/movie?api_key=d4bad6889ca363a569b4c048485b5ece&query=suspens')
+        fetch(`https://api.themoviedb.org/3/search/movie?api_key=${api_key_series}&query=suspens`)
             .then(res => res.json())
             .then(page => {
                 console.log(page.results)
                 setSerieSuspense(page.results)
             }) 
             
-        fetch('https://api.themoviedb.org/3/search/movie?api_key=d4bad6889ca363a569b4c048485b5ece&query=action')
+        fetch(`https://api.themoviedb.org/3/search/movie?api_key=${api_key_series}&query=action`)
             .then(res => res.json())
             .then(page => {
                 console.log(page.results)
                 setSerieAction(page.results)
             })
             
-        fetch('https://api.themoviedb.org/3/search/movie?api_key=d4bad6889ca363a569b4c048485b5ece&query=christm')
+        fetch(`https://api.themoviedb.org/3/search/movie?api_key=${api_key_series}&query=christm`)
             .then(res => res.json())
             .then(page => {
                 console.log(page.results)

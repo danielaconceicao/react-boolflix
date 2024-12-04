@@ -1,6 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react"
+import { useContext } from "react"
+import ApiContext from "../context/ApiContext"
 
 export default function Film() {
+    const { api_key_films} = useContext(ApiContext)
     const [filmSuspense, setFilmSuspense] = useState([])
     const [filmAction, setFilmAction] = useState([])
     const [filmRomance, setFilmRomance] = useState([])
@@ -9,27 +13,27 @@ export default function Film() {
 
     useEffect(() => {
 
-        fetch('https://api.themoviedb.org/3/search/tv?api_key=e99307154c6dfb0b4750f6603256716d&language=it_IT&query=romance')
+        fetch(`https://api.themoviedb.org/3/search/tv?api_key=${api_key_films}&query=romance`)
             .then(res => res.json())
             .then(page => {
                 console.log(page.results)
                 setFilmRomance(page.results)
             })
 
-        fetch('https://api.themoviedb.org/3/search/tv?api_key=e99307154c6dfb0b4750f6603256716d&language=it_IT&query=suspe')
+        fetch(`https://api.themoviedb.org/3/search/tv?api_key=${api_key_films}&query=suspe`)
             .then(res => res.json())
             .then(page => {
                 console.log(page.results)
                 setFilmSuspense(page.results)
             })
 
-        fetch('https://api.themoviedb.org/3/search/tv?api_key=e99307154c6dfb0b4750f6603256716d&language=it_IT&query=action')
+        fetch(`https://api.themoviedb.org/3/search/tv?api_key=${api_key_films}&query=action`)
             .then(res => res.json())
             .then(page => {
                 setFilmAction(page.results)
             })
 
-        fetch('https://api.themoviedb.org/3/search/tv?api_key=e99307154c6dfb0b4750f6603256716d&language=it_IT&query=christi')
+        fetch(`https://api.themoviedb.org/3/search/tv?api_key=${api_key_films}&query=christi`)
             .then(res => res.json())
             .then(page => {
                 console.log(page.results)
