@@ -1,7 +1,7 @@
 import './App.css'
 import { BrowserRouter, Route, Routes} from 'react-router-dom' 
 import SearchFilmsESeries from './components/SearchFilmsESeries'
-import { ApiProvider } from './components/ApiProvider'
+import { ApiProvider } from './context/ApiProvider'
 import Layout from './pages/Layout'
 import Home from './pages/Home'
 import SerieTv from './pages/SerieTv'

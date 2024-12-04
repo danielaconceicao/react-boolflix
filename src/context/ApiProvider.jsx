@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react"
-import ApiContext from "../context/ApiContext"
+import ApiContext from "./ApiContext"
 
 // eslint-disable-next-line react/prop-types
 export function ApiProvider({ children }) {/* (E um componente)funcao responsavel por fornecer os dados necessarios para os componentes filhos */
@@ -59,6 +59,8 @@ export function ApiProvider({ children }) {/* (E um componente)funcao responsave
         VoteAverage,
         searchTextVisibible,
         setSearchTextVisibible,
+        api_key_films,
+        api_key_series
     }
 
     /* Dando acesso a outros componentes */
